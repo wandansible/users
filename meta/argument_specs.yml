@@ -1,0 +1,124 @@
+---
+argument_specs:
+  main:
+    short_description: Create users and groups
+    description: |
+      Create local user accounts and groups.
+    options:
+      users:
+        description: List of user accounts to create
+        type: list
+        elements: dict
+        options:
+          username:
+            description: Name of the user to create
+            type: str
+            required: true
+          append:
+            description: |
+              If true, add the user to the groups specified in groups.
+              If false, user will only be added to the groups specified in groups,
+              removing them from all other groups.
+            type: bool
+          name:
+            description: Sets the description (aka GECOS) of the user account
+            type: str
+          create_home:
+            description: |
+              Unless set to false, a home directory will be made for the user when the account is
+              created, if the home directory does not already exist
+            type: bool
+          expires:
+            description: Date in Unix timestamp format when the user account will be disabled
+            type: float
+          generate_ssh_key:
+            description: If true, generate a SSH key for the user in question
+            type: bool
+          group:
+            description: Group to set as the user's primary group
+            type: str
+          groups:
+            description: List of groups user will be added to
+            type: list
+            elements: str
+          home:
+            description: Set the user's home directory
+            type: str
+          password:
+            description: |
+              If provided, set the user's password to the provided encrypted hash.
+              Password hash can be generated with the `mkpasswd' command.
+              To create an account with a locked/disabled password on Linux systems,
+              set this to '!' or '*'.
+            type: str
+          password_expire_max:
+            description: Maximum number of days between password change
+            type: int
+          password_expire_min:
+            description: Minimum number of days between password change
+            type: int
+          password_lock:
+            description: If true, lock the password for the account
+            type: bool
+          shell:
+            description: Set the user's shell
+            type: str
+          ssh_key_bits:
+            description: |
+              Specify the number of bits in the created SSH key when generate_ssh_key is true
+            type: int
+          ssh_key_comment:
+            description: |
+              Specify the comment for the created SSH key when generate_ssh_key is true
+            type: str
+          ssh_key_passphrase:
+            description: |
+              Specify the passphrase for the created SSH key when generate_ssh_key is true
+            type: str
+          ssh_key_type:
+            description: |
+              Specify the key type for the created SSH key when generate_ssh_key is true
+            type: str
+            default: ed25519
+          system:
+            description: If true, makes the user a system account
+            type: bool
+          uid:
+            description: Set the UID of the user account
+            type: int
+          umask:
+            description: Set the umask of the user
+            type: str
+          update_password:
+            description: |
+              If set to always, will always update passwords if they differ.
+              If set to on_create, will only set the password for newly created users.
+            type: str
+            choices:
+              - always
+              - on_create
+          authorized_keys:
+            description: List of SSH public keys to add to authorized_keys file
+            type: list
+            elements: str
+          authorized_keys_exclusive:
+            description: |
+              If true, remove all other non-specified SSH public keys from the authorized_keys file
+            type: bool
+            default: false
+
+      user_groups:
+        description: List of user groups to create
+        type: list
+        elements: dict
+        options:
+          name:
+            description: Name of the group to create
+            type: str
+            required: true
+          gid:
+            description: GID to set for the group
+            type: int
+          system:
+            description: If true, makes the group a system group
+            type: bool
