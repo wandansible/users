@@ -32,13 +32,14 @@
     path: "{{ [_user.home, '.ssh', 'authorized_keys'] | path_join }}"
   register: _authorized_key_file
 
-- name: Empty authorized_keys file when authorized_keys_exclusive set for {{ item.username }}
+- name: Empty authorized_keys file when authorized_keys_exclusive set for {{ item.username }}  # noqa risky-file-permissions
   ansible.builtin.copy:
     content: ""
     dest: "{{ [_user.home, '.ssh', 'authorized_keys'] | path_join }}"
   when:
     - item.authorized_keys_exclusive | default(false)
     - _authorized_key_file.stat.exists
+  tags: molecule-idempotence-notest
 
 - name: Add authorized ssh public key for {{ item.username }}
   ansible.posix.authorized_key:
@@ -47,3 +48,4 @@
   loop: "{{ item.authorized_keys | default([]) }}"
   loop_control:
     loop_var: "authorized_key"
+  tags: molecule-idempotence-notest

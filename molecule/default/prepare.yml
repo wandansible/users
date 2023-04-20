@@ -1,0 +1,8 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: "Install openssh-client"
+      ansible.builtin.apt:
+        pkg:
+          - "openssh-client"
