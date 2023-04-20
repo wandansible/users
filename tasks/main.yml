@@ -1,0 +1,14 @@
+---
+- name: Create groups
+  ansible.builtin.include_tasks:
+    file: create-group.yml
+  loop: "{{ user_groups }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Create users
+  ansible.builtin.include_tasks:
+    file: create-user.yml
+  loop: "{{ users }}"
+  loop_control:
+    label: "{{ item.username }}"
