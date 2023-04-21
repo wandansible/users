@@ -15,7 +15,7 @@ OPTIONS (= is mandatory):
 
 - user_groups
         List of user groups to create
-        default: null
+        default: []
         elements: dict
         type: list
 
@@ -37,7 +37,7 @@ OPTIONS (= is mandatory):
 
 - users
         List of user accounts to create
-        default: null
+        default: []
         elements: dict
         type: list
 
