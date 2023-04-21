@@ -9,6 +9,7 @@ argument_specs:
         description: List of user accounts to create
         type: list
         elements: dict
+        default: []
         options:
           username:
             description: Name of the user to create
@@ -111,6 +112,7 @@ argument_specs:
         description: List of user groups to create
         type: list
         elements: dict
+        default: []
         options:
           name:
             description: Name of the group to create
