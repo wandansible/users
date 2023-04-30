@@ -13,6 +13,14 @@ ENTRY POINT: main - Create users and groups
 
 OPTIONS (= is mandatory):
 
+- root_password_hash
+        If provided, set the root user's password to the provided
+        encrypted hash. Password hash can be generated with the
+        `mkpasswd' command. To lock the root account password on Linux
+        systems, set this to '!' or '*'.
+        default: null
+        type: str
+
 - user_groups
         List of user groups to create
         default: []
@@ -203,39 +211,41 @@ Example Playbook
 
     - hosts: all
       roles:
-         - role: wandansible.users
-           become: true
-           vars:
-             users:
-               - username: example
-                 name: Example User
-                 uid: 5000
-                 groups: ["sudo"]
-                 append: true
-                 authorized_keys:
-                   - "ssh-ed25519 AAAAAAA example@example-host"
-     
-               - username: example2
-                 name: Example User 2
-                 password: $6$0e7w/A.f6lZ8CCId$/l8IatE7Nbl9iD7ylEJRpuHkwIZc2iE9T6m1zcx0KvAiQ12FHkGI0qIZp74apeRzwuDk3BGJOmSqC1zhvP3iM1
-                 group: example-user-group
-                 authorized_keys:
-                   - "ssh-ed25519 BBBBBBB example2@example-host"
-                   - "ssh-ed25519 CCCCCCC example2@example-host"
-                 authorized_keys_exclusive: true
-                 generate_ssh_key: true
-                 ssh_key_comment: example2@example-host
-                 shell: /bin/bash
-     
-               - username: example-system
-                 name: Example System User
-                 system: true
-                 group: example-system
-                 home: /var/lib/example
-     
-             user_groups:
-               - name: example-user-group
-                 gid: 1234
-     
-               - name: example-system
-                 system: true
+        - role: wandansible.users
+          become: true
+          vars:
+            root_password_hash: "!"
+
+            users:
+              - username: example
+                name: Example User
+                uid: 5000
+                groups: ["sudo"]
+                append: true
+                authorized_keys:
+                  - "ssh-ed25519 AAAAAAA example@example-host"
+
+              - username: example2
+                name: Example User 2
+                password: $6$0e7w/A.f6lZ8CCId$/l8IatE7Nbl9iD7ylEJRpuHkwIZc2iE9T6m1zcx0KvAiQ12FHkGI0qIZp74apeRzwuDk3BGJOmSqC1zhvP3iM1
+                group: example-user-group
+                authorized_keys:
+                  - "ssh-ed25519 BBBBBBB example2@example-host"
+                  - "ssh-ed25519 CCCCCCC example2@example-host"
+                authorized_keys_exclusive: true
+                generate_ssh_key: true
+                ssh_key_comment: example2@example-host
+                shell: /bin/bash
+
+              - username: example-system
+                name: Example System User
+                system: true
+                group: example-system
+                home: /var/lib/example
+
+            user_groups:
+              - name: example-user-group
+                gid: 1234
+
+              - name: example-system
+                system: true

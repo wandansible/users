@@ -5,6 +5,13 @@ argument_specs:
     description: |
       Create local user accounts and groups.
     options:
+      root_password_hash:
+        description: |
+          If provided, set the root user's password to the provided encrypted hash.
+          Password hash can be generated with the `mkpasswd' command.
+          To lock the root account password on Linux systems, set this to '!' or '*'.
+        type: str
+
       users:
         description: List of user accounts to create
         type: list
