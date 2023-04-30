@@ -6,6 +6,8 @@
       ansible.builtin.include_role:
         name: "wandansible.users"
       vars:
+        root_password_hash: "!"
+
         users:
           - username: example
             name: Example User

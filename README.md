@@ -13,6 +13,14 @@ ENTRY POINT: main - Create users and groups
 
 OPTIONS (= is mandatory):
 
+- root_password_hash
+        If provided, set the root user's password to the provided
+        encrypted hash. Password hash can be generated with the
+        `mkpasswd' command. To lock the root account password on Linux
+        systems, set this to '!' or '*'.
+        default: null
+        type: str
+
 - user_groups
         List of user groups to create
         default: []
@@ -206,6 +214,8 @@ Example Playbook
         - role: wandansible.users
           become: true
           vars:
+            root_password_hash: "!"
+
             users:
               - username: example
                 name: Example User
