@@ -11,6 +11,7 @@ argument_specs:
           Password hash can be generated with the `mkpasswd' command.
           To lock the root account password on Linux systems, set this to '!' or '*'.
         type: str
+        no_log: true
 
       users:
         description: List of user accounts to create
@@ -59,6 +60,7 @@ argument_specs:
               To create an account with a locked/disabled password on Linux systems,
               set this to '!' or '*'.
             type: str
+            no_log: true
           password_expire_max:
             description: Maximum number of days between password change
             type: int
@@ -83,6 +85,7 @@ argument_specs:
             description: |
               Specify the passphrase for the created SSH key when generate_ssh_key is true
             type: str
+            no_log: true
           ssh_key_type:
             description: |
               Specify the key type for the created SSH key when generate_ssh_key is true
