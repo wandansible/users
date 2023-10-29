@@ -43,6 +43,12 @@ OPTIONS (= is mandatory):
             default: null
             type: bool
 
+- user_shell_packages
+        List shell packages to install
+        default: null
+        elements: str
+        type: list
+
 - users
         List of user accounts to create
         default: []

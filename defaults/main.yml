@@ -2,4 +2,6 @@
 users: []
 user_groups: []
 
+user_shell_packages: []
+
 root_password_hash: ""
