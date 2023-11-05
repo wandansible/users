@@ -2,6 +2,7 @@
 - name: Install shell packages
   ansible.builtin.apt:
     pkg: "{{ user_shell_packages }}"
+    install_recommends: false
 
 - name: Set root password
   ansible.builtin.user:
