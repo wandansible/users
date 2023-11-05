@@ -8,6 +8,9 @@
       vars:
         root_password_hash: "!"
 
+        user_shell_packages:
+          - fish
+
         users:
           - username: example
             name: Example User
